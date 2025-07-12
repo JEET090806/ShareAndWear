@@ -16,19 +16,33 @@ function renderProductTable() {
                     <span>${product.name}</span>
                 </div>
             </td>
-            <td>${product.price.toFixed(2)}</td>
-            <td>${product.status}</td>
+            <td>$${product.price.toFixed(2)}</td>
+            <td>${product.category || 'Uncategorized'}</td>
             <td>
-                <button class="action-btn edit" onclick="editProduct('${product.id}')">&#9998;</button>
-                <button class="action-btn delete" onclick="deleteProduct('${product.id}')">&#128465;</button>
+                <span class="status-badge ${product.status}">${product.status}</span>
+            </td>
+            <td>
+                <button class="action-btn edit" onclick="editProduct('${product.id}')" title="Edit">
+                    <i class="fas fa-edit"></i>
+                </button>
+                <button class="action-btn delete" onclick="deleteProduct('${product.id}')" title="Delete">
+                    <i class="fas fa-trash"></i>
+                </button>
                 ${product.status === 'pending' ? `
-                    <button class="action-btn approve" onclick="changeProductStatus('${product.id}', 'approved')">Approve</button>
-                    <button class="action-btn reject" onclick="changeProductStatus('${product.id}', 'rejected')">Reject</button>
+                    <button class="action-btn approve" onclick="changeProductStatus('${product.id}', 'approved')" title="Approve">
+                        <i class="fas fa-check"></i>
+                    </button>
+                    <button class="action-btn reject" onclick="changeProductStatus('${product.id}', 'rejected')" title="Reject">
+                        <i class="fas fa-times"></i>
+                    </button>
                 ` : ''}
             </td>
         `;
         productTableBody.appendChild(row);
     });
+    
+    // Update product count
+    document.getElementById('product-count').textContent = `${products.length} products`;
 }
 
 function saveProducts() {
@@ -42,10 +56,18 @@ productForm.addEventListener('submit', (e) => {
     const image = document.getElementById('product-image').value;
     const price = parseFloat(document.getElementById('product-price').value);
     const category = document.getElementById('product-category').value;
+    const description = document.getElementById('product-description').value;
 
     if (id) {
         const productIndex = products.findIndex(p => p.id === id);
-        products[productIndex] = { id, name, image, price, category, status: products[productIndex].status };
+        products[productIndex] = { 
+            ...products[productIndex],
+            name, 
+            image, 
+            price, 
+            category, 
+            description 
+        };
         formTitle.textContent = 'Add New Product';
         cancelEditBtn.style.display = 'none';
     } else {
@@ -55,6 +77,7 @@ productForm.addEventListener('submit', (e) => {
             image,
             price,
             category,
+            description,
             status: 'pending' // Default status for new products
         };
         products.push(newProduct);
@@ -63,6 +86,7 @@ productForm.addEventListener('submit', (e) => {
     saveProducts();
     renderProductTable();
     productForm.reset();
+    document.getElementById('product-id').value = '';
 });
 
 window.editProduct = function(id) {
@@ -71,6 +95,8 @@ window.editProduct = function(id) {
     document.getElementById('product-name').value = product.name;
     document.getElementById('product-image').value = product.image;
     document.getElementById('product-price').value = product.price;
+    document.getElementById('product-category').value = product.category || '';
+    document.getElementById('product-description').value = product.description || '';
     formTitle.textContent = 'Edit Product';
     cancelEditBtn.style.display = 'inline-block';
 }
@@ -83,9 +109,11 @@ cancelEditBtn.addEventListener('click', () => {
 });
 
 window.deleteProduct = function(id) {
-    products = products.filter(p => p.id !== id);
-    saveProducts();
-    renderProductTable();
+    if (confirm('Are you sure you want to delete this product?')) {
+        products = products.filter(p => p.id !== id);
+        saveProducts();
+        renderProductTable();
+    }
 }
 
 window.changeProductStatus = function(id, newStatus) {
@@ -102,5 +130,44 @@ window.changeProductStatus = function(id, newStatus) {
         }
     }
 };
+
+// Search functionality
+document.getElementById('search-products').addEventListener('input', (e) => {
+    const searchTerm = e.target.value.toLowerCase();
+    const rows = productTableBody.querySelectorAll('tr');
+    
+    rows.forEach(row => {
+        const productName = row.querySelector('.product-info span').textContent.toLowerCase();
+        const category = row.querySelector('td:nth-child(3)').textContent.toLowerCase();
+        
+        if (productName.includes(searchTerm) || category.includes(searchTerm)) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
+    });
+});
+
+// Status filter functionality
+document.getElementById('status-filter').addEventListener('change', (e) => {
+    const filterStatus = e.target.value;
+    const rows = productTableBody.querySelectorAll('tr');
+    
+    rows.forEach(row => {
+        const status = row.querySelector('.status-badge').textContent;
+        
+        if (filterStatus === 'all' || status === filterStatus) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
+    });
+});
+
+// Logout functionality
+window.logout = function() {
+    localStorage.removeItem('adminLoggedIn');
+    window.location.href = 'login.html';
+}
 
 renderProductTable();

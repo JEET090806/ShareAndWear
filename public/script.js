@@ -410,6 +410,9 @@ document.addEventListener('DOMContentLoaded', () => {
             section.style.transform = 'translateY(0)';
         });
         
+        // Initialize sample products
+        initializeSampleProducts();
+        
         checkLoginStatus();
         loadProductsByCategories();
         
@@ -438,6 +441,490 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Make addToCart function globally available
     window.addToCart = addToCart;
+
+    // Initialize sample products data
+    function initializeSampleProducts() {
+        // Clear existing products and reinitialize with new data
+        // This ensures we have all the new products
+        localStorage.removeItem('products');
+        
+        // Initialize with new sample data
+            const sampleProducts = [
+                // Shirts Category
+                {
+                    name: "Classic White Tee",
+                    price: 29.99,
+                    category: "Shirts",
+                    image: "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                {
+                    name: "Premium Polo Shirt",
+                    price: 45.99,
+                    category: "Shirts",
+                    image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                {
+                    name: "Oxford Button-Down",
+                    price: 59.99,
+                    category: "Shirts",
+                    image: "https://images.unsplash.com/photo-1509631179647-0177331693ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                {
+                    name: "Casual Flannel Shirt",
+                    price: 39.99,
+                    category: "Shirts",
+                    image: "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                
+                // Trousers Category
+                {
+                    name: "Classic Chino Pants",
+                    price: 69.99,
+                    category: "Trousers",
+                    image: "https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                {
+                    name: "Slim Fit Jeans",
+                    price: 79.99,
+                    category: "Trousers",
+                    image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                {
+                    name: "Formal Dress Pants",
+                    price: 89.99,
+                    category: "Trousers",
+                    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                {
+                    name: "Cargo Pants",
+                    price: 54.99,
+                    category: "Trousers",
+                    image: "https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                
+                // Dresses Category
+                {
+                    name: "Summer Floral Dress",
+                    price: 59.99,
+                    category: "Dresses",
+                    image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                {
+                    name: "Elegant Cocktail Dress",
+                    price: 129.99,
+                    category: "Dresses",
+                    image: "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                {
+                    name: "Bohemian Maxi Dress",
+                    price: 89.99,
+                    category: "Dresses",
+                    image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                {
+                    name: "Little Black Dress",
+                    price: 99.99,
+                    category: "Dresses",
+                    image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                
+                // Outerwear Category
+                {
+                    name: "Classic Denim Jacket",
+                    price: 89.99,
+                    category: "Outerwear",
+                    image: "https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                {
+                    name: "Premium Leather Jacket",
+                    price: 199.99,
+                    category: "Outerwear",
+                    image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                {
+                    name: "Professional Blazer",
+                    price: 149.99,
+                    category: "Outerwear",
+                    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                {
+                    name: "Winter Coat",
+                    price: 179.99,
+                    category: "Outerwear",
+                    image: "https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                
+                // Shoes Category
+                {
+                    name: "Premium Sneakers",
+                    price: 129.99,
+                    category: "Shoes",
+                    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                {
+                    name: "Classic Dress Shoes",
+                    price: 159.99,
+                    category: "Shoes",
+                    image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                {
+                    name: "Leather Ankle Boots",
+                    price: 179.99,
+                    category: "Shoes",
+                    image: "https://images.unsplash.com/photo-1509631179647-0177331693ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                {
+                    name: "Running Shoes",
+                    price: 119.99,
+                    category: "Shoes",
+                    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                
+                // Accessories Category
+                {
+                    name: "Leather Crossbody Bag",
+                    price: 79.99,
+                    category: "Accessories",
+                    image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                {
+                    name: "Designer Sunglasses",
+                    price: 149.99,
+                    category: "Accessories",
+                    image: "https://images.unsplash.com/photo-1509631179647-0177331693ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                {
+                    name: "Luxury Watch",
+                    price: 299.99,
+                    category: "Accessories",
+                    image: "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                {
+                    name: "Silk Scarf",
+                    price: 39.99,
+                    category: "Accessories",
+                    image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                
+                // Additional 40 Products
+                
+                // More Shirts (8 additional)
+                {
+                    name: "Striped Button-Up Shirt",
+                    price: 49.99,
+                    category: "Shirts",
+                    image: "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                {
+                    name: "V-Neck Sweater",
+                    price: 65.99,
+                    category: "Shirts",
+                    image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                {
+                    name: "Hooded Sweatshirt",
+                    price: 55.99,
+                    category: "Shirts",
+                    image: "https://images.unsplash.com/photo-1509631179647-0177331693ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                {
+                    name: "Turtleneck Sweater",
+                    price: 75.99,
+                    category: "Shirts",
+                    image: "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                {
+                    name: "Denim Shirt",
+                    price: 69.99,
+                    category: "Shirts",
+                    image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                {
+                    name: "Linen Shirt",
+                    price: 54.99,
+                    category: "Shirts",
+                    image: "https://images.unsplash.com/photo-1509631179647-0177331693ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                {
+                    name: "Graphic Tee",
+                    price: 34.99,
+                    category: "Shirts",
+                    image: "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                {
+                    name: "Crew Neck Sweater",
+                    price: 59.99,
+                    category: "Shirts",
+                    image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                
+                // More Trousers (8 additional)
+                {
+                    name: "Wide Leg Pants",
+                    price: 84.99,
+                    category: "Trousers",
+                    image: "https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                {
+                    name: "Pleated Trousers",
+                    price: 94.99,
+                    category: "Trousers",
+                    image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                {
+                    name: "High-Waisted Jeans",
+                    price: 89.99,
+                    category: "Trousers",
+                    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                {
+                    name: "Linen Pants",
+                    price: 74.99,
+                    category: "Trousers",
+                    image: "https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                {
+                    name: "Corduroy Pants",
+                    price: 79.99,
+                    category: "Trousers",
+                    image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                {
+                    name: "Jogger Pants",
+                    price: 64.99,
+                    category: "Trousers",
+                    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                {
+                    name: "Paper Bag Waist Pants",
+                    price: 89.99,
+                    category: "Trousers",
+                    image: "https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                {
+                    name: "Straight Leg Jeans",
+                    price: 94.99,
+                    category: "Trousers",
+                    image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                
+                // More Dresses (8 additional)
+                {
+                    name: "Wrap Dress",
+                    price: 79.99,
+                    category: "Dresses",
+                    image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                {
+                    name: "Midi Dress",
+                    price: 69.99,
+                    category: "Dresses",
+                    image: "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                {
+                    name: "Bodycon Dress",
+                    price: 84.99,
+                    category: "Dresses",
+                    image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                {
+                    name: "Shirt Dress",
+                    price: 74.99,
+                    category: "Dresses",
+                    image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                {
+                    name: "A-Line Dress",
+                    price: 94.99,
+                    category: "Dresses",
+                    image: "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                {
+                    name: "Pencil Dress",
+                    price: 89.99,
+                    category: "Dresses",
+                    image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                {
+                    name: "Sundress",
+                    price: 64.99,
+                    category: "Dresses",
+                    image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                {
+                    name: "Evening Gown",
+                    price: 199.99,
+                    category: "Dresses",
+                    image: "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                
+                // More Outerwear (8 additional)
+                {
+                    name: "Bomber Jacket",
+                    price: 129.99,
+                    category: "Outerwear",
+                    image: "https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                {
+                    name: "Trench Coat",
+                    price: 189.99,
+                    category: "Outerwear",
+                    image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                {
+                    name: "Puffer Jacket",
+                    price: 159.99,
+                    category: "Outerwear",
+                    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                {
+                    name: "Cardigan",
+                    price: 79.99,
+                    category: "Outerwear",
+                    image: "https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                {
+                    name: "Peacoat",
+                    price: 169.99,
+                    category: "Outerwear",
+                    image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                {
+                    name: "Windbreaker",
+                    price: 89.99,
+                    category: "Outerwear",
+                    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                {
+                    name: "Faux Fur Coat",
+                    price: 149.99,
+                    category: "Outerwear",
+                    image: "https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                {
+                    name: "Motorcycle Jacket",
+                    price: 219.99,
+                    category: "Outerwear",
+                    image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                
+                // More Shoes (8 additional)
+                {
+                    name: "Loafers",
+                    price: 139.99,
+                    category: "Shoes",
+                    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                {
+                    name: "Heels",
+                    price: 119.99,
+                    category: "Shoes",
+                    image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                {
+                    name: "Sandals",
+                    price: 89.99,
+                    category: "Shoes",
+                    image: "https://images.unsplash.com/photo-1509631179647-0177331693ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                {
+                    name: "Oxford Shoes",
+                    price: 169.99,
+                    category: "Shoes",
+                    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                {
+                    name: "Chelsea Boots",
+                    price: 189.99,
+                    category: "Shoes",
+                    image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                {
+                    name: "Slides",
+                    price: 69.99,
+                    category: "Shoes",
+                    image: "https://images.unsplash.com/photo-1509631179647-0177331693ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                {
+                    name: "Mules",
+                    price: 99.99,
+                    category: "Shoes",
+                    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                },
+                {
+                    name: "Espadrilles",
+                    price: 79.99,
+                    category: "Shoes",
+                    image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    status: "approved"
+                }
+            ];
+            
+            localStorage.setItem('products', JSON.stringify(sampleProducts));
+        }
 });
 
 // Add CSS for ripple effect
