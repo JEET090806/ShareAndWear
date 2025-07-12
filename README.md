@@ -45,7 +45,7 @@ open idex.html and run it in your browser
 
 
 Team Members :
-Om Prajapati - Team leader
-Prince Patel
-Jeet Pandya
-Darshan Madalyawala
+Om Prajapati,
+ Prince Patel, 
+  Jeet Pandya,
+   Darshan Madalyawala
