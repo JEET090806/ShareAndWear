@@ -45,7 +45,7 @@ open idex.html and run it in your browser
 
 
 Team Members :
-Om Prajapati,
- Prince Patel, 
-  Jeet Pandya,
-   Darshan Madalyawala
+Om Prajapati - om.edunet@gmail.com,
+ Prince Patel - princepatelgg27@gmail.com, 
+  Jeet Pandya - jeetpandya2006@gmail.com,
+   Darshan Madalyawala - darshanbmofficial@gmail.com
