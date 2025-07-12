@@ -31,19 +31,30 @@ document.addEventListener('DOMContentLoaded', () => {
         const email = loginForm.querySelector('input[type="email"]').value;
         const password = loginForm.querySelector('input[type="password"]').value;
 
+        // Admin login
         if (email === 'podj1234@gmail.com' && password === 'podj1234') {
-            window.location.href = 'admin.html';
+            localStorage.setItem('loggedInUser', JSON.stringify({
+                username: 'Admin',
+                email: email,
+                isAdmin: true
+            }));
+            displayMessage(loginMessage, 'Admin login successful!', 'success');
+            setTimeout(() => {
+                window.location.href = 'admin.html';
+            }, 1000);
             return;
         }
 
+        // Regular user login
         const users = JSON.parse(localStorage.getItem('users')) || [];
         const user = users.find(u => u.email === email && u.password === password);
 
         if (user) {
             localStorage.setItem('loggedInUser', JSON.stringify(user));
-            displayMessage(loginMessage, 'Login successful!', 'success');
+            displayMessage(loginMessage, 'Login successful! Redirecting...', 'success');
             setTimeout(() => {
-                window.location.href = 'landing.html';
+                // Redirect back to index.html instead of landing.html
+                window.location.href = 'index.html';
             }, 1000);
         } else {
             displayMessage(loginMessage, 'Invalid email or password.', 'error');

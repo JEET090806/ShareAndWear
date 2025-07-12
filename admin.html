@@ -3,58 +3,161 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Admin Panel - Manage ShareAndWear products and content">
+    <meta name="theme-color" content="#667eea">
     <title>Admin Panel - ShareAndWear</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="logo.jpeg">
 </head>
 <body>
     <div class="admin-container">
         <div class="admin-header">
-            <h1>Admin Panel</h1>
-            <a href="index.html" class="cta-button">View Site</a>
+            <div class="admin-header-left">
+                <h1><i class="fas fa-cog"></i> Admin Panel</h1>
+                <p>Manage your ShareAndWear products and content</p>
+            </div>
+            <div class="admin-header-right">
+                <a href="index.html" class="cta-button">
+                    <i class="fas fa-external-link-alt"></i>
+                    View Site
+                </a>
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </button>
+            </div>
         </div>
 
         <div class="admin-content">
             <div class="admin-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-plus-circle"></i> <span id="form-title">Add New Product</span></h2>
+                    <p class="card-description">Create and manage your product catalog</p>
+                </div>
+                
                 <form id="product-form">
-                    <h2 id="form-title">Add New Product</h2>
                     <input type="hidden" id="product-id">
+                    
                     <div class="form-group">
-                        <label for="product-name">Product Name</label>
+                        <label for="product-name">
+                            <i class="fas fa-tag"></i>
+                            Product Name
+                        </label>
                         <input type="text" id="product-name" placeholder="e.g., Classic White Tee" required>
                     </div>
+                    
                     <div class="form-group">
-                        <label for="product-image">Image URL</label>
+                        <label for="product-image">
+                            <i class="fas fa-image"></i>
+                            Image URL
+                        </label>
                         <input type="url" id="product-image" placeholder="e.g., https://example.com/image.jpg" required>
+                        <small class="form-help">Enter a valid image URL (JPG, PNG, WebP)</small>
                     </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="product-price">
+                                <i class="fas fa-dollar-sign"></i>
+                                Price
+                            </label>
+                            <input type="number" id="product-price" placeholder="29.99" step="0.01" min="0" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="product-category">
+                                <i class="fas fa-folder"></i>
+                                Category
+                            </label>
+                            <select id="product-category" required>
+                                <option value="">Select Category</option>
+                                <option value="Tops">Tops</option>
+                                <option value="Bottoms">Bottoms</option>
+                                <option value="Dresses">Dresses</option>
+                                <option value="Outerwear">Outerwear</option>
+                                <option value="Shoes">Shoes</option>
+                                <option value="Accessories">Accessories</option>
+                            </select>
+                        </div>
+                    </div>
+                    
                     <div class="form-group">
-                        <label for="product-price">Price</label>
-                        <input type="number" id="product-price" placeholder="e.g., 29.99" step="0.01" required>
+                        <label for="product-description">
+                            <i class="fas fa-align-left"></i>
+                            Description
+                        </label>
+                        <textarea id="product-description" placeholder="Enter product description..." rows="3"></textarea>
                     </div>
-                    <div class="form-group">
-                        <label for="product-category">Category</label>
-                        <input type="text" id="product-category" placeholder="e.g., Shirts, Trousers" required>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="cta-button">
+                            <i class="fas fa-save"></i>
+                            <span id="submit-text">Save Product</span>
+                        </button>
+                        <button type="button" id="cancel-edit-btn" class="secondary-btn" style="display: none;">
+                            <i class="fas fa-times"></i>
+                            Cancel Edit
+                        </button>
                     </div>
-                    <button type="submit" class="cta-button">Save Product</button>
-                    <button type="button" id="cancel-edit-btn" class="cta-button secondary-btn" style="display: none;">Cancel Edit</button>
                 </form>
             </div>
 
             <div class="admin-card product-list">
-                <h2>Existing Products</h2>
-                <table id="product-table">
-                    <thead>
-                        <tr>
-                            <th>Product</th>
-                            <th>Price</th>
-                            <th>Status</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Product rows will be inserted here -->
-                    </tbody>
-                </table>
+                <div class="card-header">
+                    <h2><i class="fas fa-list"></i> Product Management</h2>
+                    <p class="card-description">Review and manage existing products</p>
+                </div>
+                
+                <div class="table-controls">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="search-products" placeholder="Search products...">
+                    </div>
+                    <div class="filter-controls">
+                        <select id="status-filter">
+                            <option value="all">All Status</option>
+                            <option value="pending">Pending</option>
+                            <option value="approved">Approved</option>
+                            <option value="rejected">Rejected</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="table-container">
+                    <table id="product-table">
+                        <thead>
+                            <tr>
+                                <th><i class="fas fa-image"></i> Product</th>
+                                <th><i class="fas fa-dollar-sign"></i> Price</th>
+                                <th><i class="fas fa-folder"></i> Category</th>
+                                <th><i class="fas fa-info-circle"></i> Status</th>
+                                <th><i class="fas fa-cogs"></i> Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Product rows will be inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="table-footer">
+                    <div class="table-info">
+                        <span id="product-count">0 products</span>
+                    </div>
+                    <div class="table-pagination">
+                        <button class="pagination-btn" id="prev-page">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <span id="page-info">Page 1 of 1</span>
+                        <button class="pagination-btn" id="next-page">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
